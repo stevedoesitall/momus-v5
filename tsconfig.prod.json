@@ -1,7 +1,0 @@
-{
-    "extends": "./tsconfig",
-    "exclude": [
-        "components/**/*.test.ts"
-    ]
-  }
-  

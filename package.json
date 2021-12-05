@@ -4,7 +4,7 @@
   "description": "Momus.io API, built in TypeScript and Express.js",
   "scripts": {
     "commit": "git init && git status && git add . && git commit -m $MSG && git push",
-    "build": "rimraf dist && tsc -p tsconfig.prod.json",
+    "build": "rimraf dist && tsc",
     "start": "node dist/src/server.js",
     "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/server.ts",
     "lint": "eslint . --ext .ts --fix",
