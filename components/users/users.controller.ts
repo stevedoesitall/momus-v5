@@ -24,13 +24,7 @@ class UsersController {
 
 	async getUser(req: Request, res: Response) {
 		try {
-			const user = await UsersServices.findOne(req.params.id, "id");
-        
-			if (!user) {
-				return res.status(404).send({
-					"error": "No user found."
-				});
-			}
+			const user = res.typedLocals.user;
         
 			return res.status(200).send(user);
 		}
@@ -48,13 +42,7 @@ class UsersController {
 
 	async getAllUsers(req: Request, res: Response) {
 		try {
-			const allUsers = await UsersServices.findAll();
-        
-			if (!allUsers.length) {
-				return res.status(404).send({
-					"error": "No users found."
-				});
-			}
+			const allUsers = res.typedLocals.users;
         
 			return res.status(200).send(allUsers);
 		}
@@ -72,14 +60,6 @@ class UsersController {
 
 	async patchUser(req: Request, res: Response) {
 		try {
-			const user = await UsersServices.findOne(req.body.id);
-        
-			if (!user) {
-				return res.status(404).send({
-					"error": "No user found."
-				});
-			}
-        
 			await UsersServices.updateOne(req.body);
         
 			return res.status(201).send({
@@ -100,14 +80,6 @@ class UsersController {
 
 	async deleteUser(req: Request, res: Response) {
 		try {
-			const user = await UsersServices.findOne(req.body.id);
-        
-			if (!user) {
-				return res.status(404).send({
-					"error": "No user found."
-				});
-			}
-        
 			await UsersServices.deleteOne(req.body.id);
         
 			return res.status(201).send({

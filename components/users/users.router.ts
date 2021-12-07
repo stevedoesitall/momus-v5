@@ -15,10 +15,10 @@ class UsersRouter extends CommonRoutesConfig {
 	getRoutes() {
 		this.router
 			.post("/", [ UsersMiddleware.validateUserFields, UsersMiddleware.validateUserIsNew ], UsersController.createUser)
-			.get("/:id", UsersController.getUser)
-			.get("/", UsersController.getAllUsers)
-			.patch("/", UsersController.patchUser)
-			.delete("/", UsersController.deleteUser);
+			.get("/:id", [ UsersMiddleware.validateUserExists ],  UsersController.getUser)
+			.get("/", [ UsersMiddleware.validateUserExists ], UsersController.getAllUsers)
+			.patch("/", [ UsersMiddleware.validateUserExists, UsersMiddleware.validateUserUpdates ], UsersController.patchUser)
+			.delete("/", [ UsersMiddleware.validateUserExists ], UsersController.deleteUser);
 
 		return this.router;
 	}

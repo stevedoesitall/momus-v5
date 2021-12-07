@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateUser } from "./users.interface";
+import { CreateUser, UpdateUser } from "./users.interface";
 import UserServices from "./users.services";
+
 
 class UsersMiddleware {
 	async validateUserIsNew(req: Request, res: Response, next: NextFunction) {
@@ -12,7 +13,37 @@ class UsersMiddleware {
 				"error": "User already exists."
 			});
 		}
-	
+
+		next();
+	}
+
+	async validateUserExists(req: Request, res: Response, next: NextFunction) {
+
+		if (req.params.id || req.body.id) {
+			const userId: string = req.params.id || req.body.id;
+			const user = await UserServices.findOne(userId, "id");
+			
+			if (!user) {
+				return res.status(404).send({
+					"error": "User does not exist."
+				});
+			}
+
+			res.typedLocals = res.locals;
+			res.typedLocals.user = user;
+
+		} else {
+			const users = await UserServices.findAll();
+
+			if (!users.length) {
+				return res.status(404).send({
+					"error": "No users found."
+				});
+			}
+			res.typedLocals = res.locals;
+			res.typedLocals.users = users;
+		}
+
 		next();
 	}
 
@@ -31,6 +62,49 @@ class UsersMiddleware {
 			});
 		}
 	
+		next();
+	}
+
+	async validateUserUpdates(req: Request, res: Response, next: NextFunction) {
+		const reqBody: UpdateUser = req.body;
+		const user = await UserServices.findOne(reqBody.id, "id");
+		
+		if (!user) {
+			return res.status(404).send({
+				"error": "User doesn't exist."
+			});
+		}
+
+		if (reqBody.user_name) {
+			const userNameCheck = await UserServices.findOne(reqBody.user_name, "user_name");
+
+			if (userNameCheck) {
+				return res.status(400).send({
+					"error": "Username taken."
+				});
+			}
+		}
+
+		if (reqBody.email) {
+			const userEmailCheck = await UserServices.findOne(reqBody.email, "email");
+			if (userEmailCheck) {
+				return res.status(400).send({
+					"error": "Email taken."
+				});
+			}
+		}
+
+		const allowedUpdates: string[] = [ "email", "password", "user_name"];
+
+		let providedFields: string[] = Object.keys(reqBody);
+		providedFields = providedFields.filter(field => allowedUpdates.includes(field));
+
+		if (!providedFields.length) {
+			return res.status(400).send({
+				"error": "Invalid fields. Please provide one of the following to update: email, password, user_name."
+			});
+		}
+
 		next();
 	}
 }

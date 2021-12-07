@@ -6,7 +6,7 @@
     "commit": "git init && git status && git add . && git commit -m $MSG && git push",
     "build": "rimraf dist && tsc",
     "start": "node dist/src/server.js",
-    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/server.ts",
+    "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files src/server.ts",
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit"
   },
@@ -36,11 +36,6 @@
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   },
-  "eslintignore": [
-    "*.test.ts",
-    "node_modules/",
-    "dist/"
-  ],
   "eslintConfig": {
     "env": {
       "es2021": true,
@@ -57,6 +52,11 @@
     },
     "plugins": [
       "@typescript-eslint"
+    ],
+    "ignorePatterns": [
+      "dist", 
+      "node_modules", 
+      "*.js"
     ],
     "rules": {
       "@typescript-eslint/no-var-requires": "off",
