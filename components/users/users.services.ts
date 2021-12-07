@@ -24,6 +24,7 @@ class UsersServices {
 
 	async findAll(): Promise<users[]> {
 		const allUsers: users[] = await prisma.users.findMany();
+		
 		return allUsers;
 	}
 

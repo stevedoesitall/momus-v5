@@ -40,6 +40,7 @@ class UsersMiddleware {
 					"error": "No users found."
 				});
 			}
+
 			res.typedLocals = res.locals;
 			res.typedLocals.users = users;
 		}
@@ -87,6 +88,7 @@ class UsersMiddleware {
 
 		if (reqBody.email) {
 			const userEmailCheck = await UserServices.findOne(reqBody.email, "email");
+			
 			if (userEmailCheck) {
 				return res.status(400).send({
 					"error": "Email taken."
