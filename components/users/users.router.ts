@@ -1,27 +1,15 @@
-import express, { Router } from "express";
-import { CommonRoutesConfig } from "../common/common.routes.config";
 import UsersMiddleware from "./users.middleware";
 import UsersController from "./users.controller";
+import { RouterConfig } from "../../configs/config.routes";
 
-class UsersRouter extends CommonRoutesConfig {
-	router: Router;
-	
-	constructor(name: string, router: Router) {
-		super(name);
-		this.name = name;
-		this.router = router;
-	}
+const userRouter = new RouterConfig();
+userRouter.name = "users";
+userRouter.router
+	.post("/", [ UsersMiddleware.validateUserFields, UsersMiddleware.validateUserIsNew ], UsersController.createUser)
+	.get("/:id", [ UsersMiddleware.validateUserExists ], UsersController.getUser)
+	.get("/:id/favorites", [ UsersMiddleware.validateUserExists ], UsersController.getFavorites)
+	.get("/", [ UsersMiddleware.validateUserExists ], UsersController.getAllUsers)
+	.patch("/:id", [ UsersMiddleware.validateUserExists, UsersMiddleware.validateUserUpdates ], UsersController.patchUser)
+	.delete("/:id", [ UsersMiddleware.validateUserExists ], UsersController.deleteUser);
 
-	getRoutes() {
-		this.router
-			.post("/", [ UsersMiddleware.validateUserFields, UsersMiddleware.validateUserIsNew ], UsersController.createUser)
-			.get("/:id", [ UsersMiddleware.validateUserExists ],  UsersController.getUser)
-			.get("/", [ UsersMiddleware.validateUserExists ], UsersController.getAllUsers)
-			.patch("/", [ UsersMiddleware.validateUserExists, UsersMiddleware.validateUserUpdates ], UsersController.patchUser)
-			.delete("/", [ UsersMiddleware.validateUserExists ], UsersController.deleteUser);
-
-		return this.router;
-	}
-}
-
-export default new UsersRouter("/users", express.Router()) as UsersRouter; 
+export default userRouter;

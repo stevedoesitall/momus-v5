@@ -16,15 +16,16 @@ class UsersMiddleware {
         next();
     }
     async validateUserExists(req, res, next) {
-        if (req.params.id || req.body.id) {
-            const userId = req.params.id || req.body.id;
+        if (req.params.id) {
+            const userId = req.params.id;
             const user = await users_services_1.default.findOne(userId, "id");
             if (!user) {
                 return res.status(404).send({
                     "error": "User does not exist."
                 });
             }
-            res.locals.user = user;
+            res.typedLocals = res.locals;
+            res.typedLocals.user = user;
         }
         else {
             const users = await users_services_1.default.findAll();
@@ -33,6 +34,7 @@ class UsersMiddleware {
                     "error": "No users found."
                 });
             }
+            res.typedLocals = res.locals;
             res.typedLocals.users = users;
         }
         next();
@@ -46,7 +48,7 @@ class UsersMiddleware {
         const missingFieldsMsg = missingFields.toString().replaceAll(",", ", ");
         if (providedFields.length !== requiredFields.length) {
             return res.status(400).send({
-                "error": `Missing requires fields: ${missingFieldsMsg}`
+                "error": `Missing required fields: ${missingFieldsMsg}`
             });
         }
         next();
@@ -75,12 +77,12 @@ class UsersMiddleware {
                 });
             }
         }
-        const allowedUpdates = ["email", "password", "user_name"];
+        const allowedUpdates = ["email", "password", "user_name", "favorites"];
         let providedFields = Object.keys(reqBody);
         providedFields = providedFields.filter(field => allowedUpdates.includes(field));
         if (!providedFields.length) {
             return res.status(400).send({
-                "error": "Invalid fields. Please provide one of the following to update: email, password, user_name."
+                "error": "Invalid fields. Please provide one of the following to update: email, password, user_name, favorites."
             });
         }
         next();

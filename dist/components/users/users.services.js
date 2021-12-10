@@ -24,6 +24,10 @@ class UsersServices {
         const allUsers = await prisma.users.findMany();
         return allUsers;
     }
+    async findFavorites(userId) {
+        const favorites = await prisma.$queryRaw `SELECT t.id as tweet_id, t.text as text FROM tweets t JOIN users_tweets ut ON ut.tweet_id = t.id JOIN users u ON u.id = ut.user_id WHERE ut.user_id = ${userId} ORDER BY t.created_at ASC`;
+        return favorites;
+    }
     async updateOne(data) {
         const user = await prisma.users.update({
             data,

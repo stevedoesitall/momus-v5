@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
-import { PrismaClient, users } from "@prisma/client";
-import { CreateUser, UpdateUser } from "./users.interface";
+import { PrismaClient, users, tweets } from "@prisma/client";
+import { CreateUser, UpdateUser } from "./users.model";
 
 const prisma = new PrismaClient();
 
@@ -24,8 +24,14 @@ class UsersServices {
 
 	async findAll(): Promise<users[]> {
 		const allUsers: users[] = await prisma.users.findMany();
-		
+
 		return allUsers;
+	}
+
+	async findFavorites(userId: string): Promise<tweets[]> {
+		const favorites: tweets[] = await prisma.$queryRaw`SELECT t.id as tweet_id, t.text as text FROM tweets t JOIN users_tweets ut ON ut.tweet_id = t.id JOIN users u ON u.id = ut.user_id WHERE ut.user_id = ${userId} ORDER BY t.created_at ASC`;
+
+		return favorites;
 	}
 
 	async updateOne(data: UpdateUser): Promise<users> {

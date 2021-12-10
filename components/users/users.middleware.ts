@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateUser, UpdateUser } from "./users.interface";
-import UserServices from "./users.services";
-
+import { CreateUser, UpdateUser } from "./users.model";
+import UsersServices from "./users.services";
 
 class UsersMiddleware {
 	async validateUserIsNew(req: Request, res: Response, next: NextFunction) {
 		const reqBody: CreateUser = req.body;
-		const user = await UserServices.findOne(reqBody.user_name, "user_name");
+		const user = await UsersServices.findOne(reqBody.user_name, "user_name");
 		
 		if (user) {
 			return res.status(400).send({
@@ -18,10 +17,9 @@ class UsersMiddleware {
 	}
 
 	async validateUserExists(req: Request, res: Response, next: NextFunction) {
-
-		if (req.params.id || req.body.id) {
-			const userId: string = req.params.id || req.body.id;
-			const user = await UserServices.findOne(userId, "id");
+		if (req.params.id) {
+			const userId: string = req.params.id;
+			const user = await UsersServices.findOne(userId, "id");
 			
 			if (!user) {
 				return res.status(404).send({
@@ -33,7 +31,7 @@ class UsersMiddleware {
 			res.typedLocals.user = user;
 
 		} else {
-			const users = await UserServices.findAll();
+			const users = await UsersServices.findAll();
 
 			if (!users.length) {
 				return res.status(404).send({
@@ -59,7 +57,7 @@ class UsersMiddleware {
 
 		if (providedFields.length !== requiredFields.length) {
 			return res.status(400).send({
-				"error": `Missing requires fields: ${missingFieldsMsg}`
+				"error": `Missing required fields: ${missingFieldsMsg}`
 			});
 		}
 	
@@ -68,7 +66,7 @@ class UsersMiddleware {
 
 	async validateUserUpdates(req: Request, res: Response, next: NextFunction) {
 		const reqBody: UpdateUser = req.body;
-		const user = await UserServices.findOne(reqBody.id, "id");
+		const user = await UsersServices.findOne(reqBody.id, "id");
 		
 		if (!user) {
 			return res.status(404).send({
@@ -77,7 +75,7 @@ class UsersMiddleware {
 		}
 
 		if (reqBody.user_name) {
-			const userNameCheck = await UserServices.findOne(reqBody.user_name, "user_name");
+			const userNameCheck = await UsersServices.findOne(reqBody.user_name, "user_name");
 
 			if (userNameCheck) {
 				return res.status(400).send({
@@ -87,8 +85,8 @@ class UsersMiddleware {
 		}
 
 		if (reqBody.email) {
-			const userEmailCheck = await UserServices.findOne(reqBody.email, "email");
-			
+			const userEmailCheck = await UsersServices.findOne(reqBody.email, "email");
+
 			if (userEmailCheck) {
 				return res.status(400).send({
 					"error": "Email taken."
@@ -96,14 +94,14 @@ class UsersMiddleware {
 			}
 		}
 
-		const allowedUpdates: string[] = [ "email", "password", "user_name"];
+		const allowedUpdates: string[] = [ "email", "password", "user_name", "favorites" ];
 
 		let providedFields: string[] = Object.keys(reqBody);
 		providedFields = providedFields.filter(field => allowedUpdates.includes(field));
 
 		if (!providedFields.length) {
 			return res.status(400).send({
-				"error": "Invalid fields. Please provide one of the following to update: email, password, user_name."
+				"error": "Invalid fields. Please provide one of the following to update: email, password, user_name, favorites."
 			});
 		}
 

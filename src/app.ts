@@ -1,12 +1,13 @@
 import cors from "cors";
-import express from "express";
-import UsersRouter from "../components/users/users.router";
+import express, { Application } from "express";
+import AppRoutes from "./routes";
 
-const app: express.Application = express();
+const appRoutes = new AppRoutes();
+const app: Application = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-app.use(UsersRouter.getName(), UsersRouter.getRoutes());
+app.use(appRoutes.getUserRoutes().name, appRoutes.getUserRoutes().router);
 
 export default app;

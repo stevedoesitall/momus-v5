@@ -23,8 +23,11 @@ class UsersController {
     }
     async getUser(req, res) {
         try {
-            const user = res.locals.user;
-            return res.status(200).send(user);
+            const user = res.typedLocals.user;
+            return res.status(200).send({
+                user,
+                "ok": true
+            });
         }
         catch (error) {
             return res.status(500).send({
@@ -35,14 +38,41 @@ class UsersController {
             console.log("Finished.");
         }
     }
-    async getAllUsers(req, res) {
+    async getFavorites(req, res) {
         try {
-            const allUsers = res.locals.users;
-            return res.status(200).send(allUsers);
+            const favorites = await users_services_1.default.findFavorites(req.params.id);
+            if (favorites.length) {
+                return res.status(200).send({
+                    favorites,
+                    "ok": true
+                });
+            }
+            else {
+                return res.status(204).send();
+            }
         }
         catch (error) {
             return res.status(500).send({
-                "error": "Bad request."
+                "error": "Bad request.",
+                "ok": false
+            });
+        }
+        finally {
+            console.log("Finished.");
+        }
+    }
+    async getAllUsers(req, res) {
+        try {
+            const users = res.typedLocals.users;
+            return res.status(200).send({
+                users,
+                "ok": true
+            });
+        }
+        catch (error) {
+            return res.status(500).send({
+                "error": "Bad request.",
+                "ok": false
             });
         }
         finally {
@@ -58,7 +88,8 @@ class UsersController {
         }
         catch (error) {
             return res.status(500).send({
-                "error": "Bad request."
+                "error": "Bad request.",
+                "ok": false
             });
         }
         finally {
@@ -74,7 +105,8 @@ class UsersController {
         }
         catch (error) {
             return res.status(500).send({
-                "error": "Bad request."
+                "error": "Bad request.",
+                "ok": false
             });
         }
         finally {

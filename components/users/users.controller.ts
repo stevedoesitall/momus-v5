@@ -26,7 +26,10 @@ class UsersController {
 		try {
 			const user = res.typedLocals.user;
         
-			return res.status(200).send(user);
+			return res.status(200).send({
+				user,
+				"ok": true
+			});
 		}
         
 		catch (error) {
@@ -40,16 +43,46 @@ class UsersController {
 		}
 	}
 
-	async getAllUsers(req: Request, res: Response) {
+	async getFavorites(req: Request, res: Response) {
 		try {
-			const allUsers = res.typedLocals.users;
-        
-			return res.status(200).send(allUsers);
+			const favorites = await UsersServices.findFavorites(req.params.id);
+
+			if (favorites.length) {
+				return res.status(200).send({
+					favorites,
+					"ok": true
+				});
+			} else {
+				return res.status(204).send();
+			}
 		}
         
 		catch (error) {
 			return res.status(500).send({
-				"error": "Bad request."
+				"error": "Bad request.",
+				"ok": false
+			});
+		}
+        
+		finally {
+			console.log("Finished.");
+		}
+	}
+
+	async getAllUsers(req: Request, res: Response) {
+		try {
+			const users = res.typedLocals.users;
+        
+			return res.status(200).send({
+				users,
+				"ok": true
+			});
+		}
+        
+		catch (error) {
+			return res.status(500).send({
+				"error": "Bad request.",
+				"ok": false
 			});
 		}
         
@@ -69,7 +102,8 @@ class UsersController {
         
 		catch (error) {
 			return res.status(500).send({
-				"error": "Bad request."
+				"error": "Bad request.",
+				"ok": false
 			});
 		}
         
@@ -89,7 +123,8 @@ class UsersController {
         
 		catch (error) {
 			return res.status(500).send({
-				"error": "Bad request."
+				"error": "Bad request.",
+				"ok": false
 			});
 		}
         
