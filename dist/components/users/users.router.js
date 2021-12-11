@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const users_middleware_1 = __importDefault(require("./users.middleware"));
 const users_controller_1 = __importDefault(require("./users.controller"));
-const config_routes_1 = require("../config/config.routes");
+const config_routes_1 = require("../../configs/config.routes");
 const userRouter = new config_routes_1.RouterConfig();
 userRouter.name = "users";
 userRouter.router

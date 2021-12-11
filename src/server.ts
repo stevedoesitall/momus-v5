@@ -1,9 +1,7 @@
-import dotenv from "dotenv";
 import app from "./app";
+import configObj from "../configs/config.vars";
 
-dotenv.config();
-
-const port: string | undefined = process.env.PORT;
+const { port } = configObj;
 
 app.listen(port, (): void => {
 	console.log(`Connected on port ${port}`);
