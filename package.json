@@ -4,8 +4,8 @@
   "description": "Momus.io API, built in TypeScript and Express.js",
   "scripts": {
     "commit": "git init && git status && git add . && git commit -m $MSG && git push",
-    "build": "rm -rf dist && tsc",
-    "start": "node dist/src/server.js",
+    "build": "rm -rf build && tsc",
+    "start": "node build/src/server.js",
     "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files src/server.ts",
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit"
@@ -56,7 +56,7 @@
       "@typescript-eslint"
     ],
     "ignorePatterns": [
-      "dist",
+      "build",
       "node_modules",
       "*.js"
     ],
