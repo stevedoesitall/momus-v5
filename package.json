@@ -10,6 +10,9 @@
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit"
   },
+	"engines": {
+		"node": "16.x"
+	},
   "author": "Steve Giordano",
   "license": "ISC",
   "dependencies": {

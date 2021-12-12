@@ -13,7 +13,8 @@ class UsersController {
     
 		catch (error) {
 			return res.status(500).send({
-				"error": "Bad request."
+				"error": "Bad request.",
+				"ok": false
 			});
 		}
     
@@ -27,14 +28,15 @@ class UsersController {
 			const user = res.typedLocals.user;
         
 			return res.status(200).send({
-				user,
+				data: user,
 				"ok": true
 			});
 		}
         
 		catch (error) {
 			return res.status(500).send({
-				"error": "Bad request."
+				"error": "Bad request.",
+				"ok": false
 			});
 		}
         
@@ -49,7 +51,7 @@ class UsersController {
 
 			if (favorites.length) {
 				return res.status(200).send({
-					favorites,
+					data: favorites,
 					"ok": true
 				});
 			} else {
@@ -74,7 +76,7 @@ class UsersController {
 			const users = res.typedLocals.users;
         
 			return res.status(200).send({
-				users,
+				data: users,
 				"ok": true
 			});
 		}
