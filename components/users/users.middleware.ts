@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateUser, UpdateUser } from "./users.model";
+import { CreateUser, UpdateUser } from "../../types/users.model";
 import UsersServices from "./users.services";
 
 class UsersMiddleware {
@@ -28,7 +28,7 @@ class UsersMiddleware {
 			}
 
 			res.typedLocals = res.locals;
-			res.typedLocals.user = user;
+			res.typedLocals.dataObj = user;
 
 		} else {
 			const users = await UsersServices.findAll();
@@ -40,7 +40,7 @@ class UsersMiddleware {
 			}
 
 			res.typedLocals = res.locals;
-			res.typedLocals.users = users;
+			res.typedLocals.dataArr = users;
 		}
 
 		next();

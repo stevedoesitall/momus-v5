@@ -25,7 +25,7 @@ class UsersController {
 
 	async getUser(req: Request, res: Response) {
 		try {
-			const user = res.typedLocals.user;
+			const user = res.typedLocals.dataObj;
         
 			return res.status(200).send({
 				data: user,
@@ -73,7 +73,7 @@ class UsersController {
 
 	async getAllUsers(req: Request, res: Response) {
 		try {
-			const users = res.typedLocals.users;
+			const users = res.typedLocals.dataArr;
         
 			return res.status(200).send({
 				data: users,
