@@ -6,10 +6,11 @@
     "commit": "git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
     "build": "rm -rf build && tsc",
     "start": "node build/src/server.js",
-    "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files src/server.ts & npm run scss",
+    "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files src/server.ts & npm run scss & npm run purge",
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit",
-    "scss": "sass --watch src/scss/main.scss public/styles/global.css"
+    "scss": "sass --watch src/scss/main.scss public/styles/main.css",
+    "purge": "purgecss -css public/styles/global.css --content views/**/*.ejs --output public/styles/min.css"
   },
   "engines": {
     "node": "16.x"
