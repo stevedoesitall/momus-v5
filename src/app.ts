@@ -1,5 +1,6 @@
+import path from "node:path";
 import cors from "cors";
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import AppRoutes from "./routes";
@@ -15,11 +16,21 @@ const app: Application = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.static("public"));
+
 app.use(cors());
 app.use(helmet());
 app.use(morgan(":method _ :url _ :status _ :response-time"));
 
 app.use(appRoutes.getUserRoutes().name, appRoutes.getUserRoutes().router);
 app.use(appRoutes.getTweetRoutes().name, appRoutes.getTweetRoutes().router);
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "../views"));
+app.set("view options", { layout: false } );
+
+app.get("/", (req: Request, res: Response) => {
+	res.render("pages/index");
+});
 
 export default app;
