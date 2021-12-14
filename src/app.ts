@@ -22,6 +22,7 @@ app.use(helmet());
 app.use(morgan(":method _ :url _ :status _ :response-time"));
 
 app.use(appRoutes.getUserRoutes().name, appRoutes.getUserRoutes().router);
+
 app.use(appRoutes.getTweetRoutes().name, appRoutes.getTweetRoutes().router);
 
 export default app;
