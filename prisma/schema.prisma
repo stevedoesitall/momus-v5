@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tweets {
+  id           String         @id @db.VarChar(225)
+  text         String         @db.VarChar(500)
+  created_at   DateTime?      @db.Timestamp(6)
+  users_tweets users_tweets[]
+}
+
+model users {
+  id                String         @id @db.VarChar(225)
+  user_name         String         @db.VarChar(25)
+  password          String?        @db.VarChar(225)
+  last_pageview     String?        @db.VarChar(10)
+  last_update_date  DateTime?      @default(now()) @db.Timestamp(6)
+  created_at        DateTime?      @db.Timestamp(6)
+  logged_in         Boolean?
+  latest_session_id String?        @db.VarChar(255)
+  is_admin          Boolean?
+  is_verified       Boolean?
+  token_time        DateTime?      @db.Timestamp(6)
+  verify_time       DateTime?      @db.Timestamp(6)
+  token             String?        @db.VarChar(225)
+  reset_token       String?        @db.VarChar(225)
+  email             String?        @db.VarChar(225)
+  users_tweets      users_tweets[]
+}
+
+model users_tweets {
+  user_id  String @db.VarChar(225)
+  tweet_id String @db.VarChar(225)
+  tweets   tweets @relation(fields: [tweet_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users    users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([user_id, tweet_id], map: "pk_user_tweet")
+}
