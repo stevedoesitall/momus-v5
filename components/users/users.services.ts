@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { PrismaClient, users, tweets } from "@prisma/client";
-import { CreateUser, UpdateUser } from "./users.model";
+import { CreateUser, UpdateUser } from "../../types/users.model";
 
 const prisma = new PrismaClient();
 

@@ -1,5 +1,5 @@
 import { PrismaClient, tweets } from "@prisma/client";
-import { CreateTweet } from "../../types/tweets.model";
+// import { CreateTweet } from "../../types/tweets.model";
 
 const prisma = new PrismaClient();
 
