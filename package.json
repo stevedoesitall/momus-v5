@@ -9,13 +9,14 @@
     "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files build/src/server.js",
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit",
-    "scss": "sass src/scss/main.scss public/styles/global.css",
+    "scss": "sass src/scss/global.scss public/styles/global.css",
     "purge": "purgecss -css public/styles/global.css --content views/**/*.ejs --output public/styles/global.css",
-    "build:public": "npm run scss && npm run purge & npm run copy:views & npm run copy:assets & npm run copy:styles & npm run bundle:js",
+    "build:public": "npm run bundle:css && npm run copy:views && npm run copy:assets && npm run copy:styles && npm run bundle:js",
     "copy:views": "mkdir build/views && cp -r views/* build/views",
     "copy:styles": "mkdir build/public/styles && cp -r public/styles/* build/public/styles",
     "copy:assets": "mkdir build/public/images && cp -r public/images/* build/public/images",
     "dev:build": "npm run build && npm run dev",
+    "bundle:css": "npm run scss && npm run purge",
     "bundle:js": "esbuild ./build/public/scripts/index.js --bundle --outfile=./build/public/scripts/bundle.js --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --format=esm"
   },
   "engines": {
