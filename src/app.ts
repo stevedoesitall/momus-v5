@@ -22,8 +22,12 @@ app.use(express.static(publicPath));
 
 app.use(cors());
 
-// Reconfigure once errors are figured out
-// app.use(helmet());
+app.use(
+	helmet({
+		contentSecurityPolicy: false,
+	})
+);
+
 app.use(morgan(":method _ :url _ :status _ :response-time"));
 
 app.use(appRoutes.getUserRoutes().name, appRoutes.getUserRoutes().router);
