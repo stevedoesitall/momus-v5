@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Momus.io, built with TypeScript and Node.js",
   "scripts": {
-    "commit": "git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
+    "commit": "npm run build && git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
     "build": "rm -rf build && tsc && npm run build:public",
     "start": "node build/src/server.js",
     "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files build/src/server.js",
