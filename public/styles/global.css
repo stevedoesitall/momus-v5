@@ -3,8 +3,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap");
 /* Bulma Helpers */
 
+.has-text-primary {
+  color: #5a32a3 !important;
+}
+
+a.has-text-primary:hover, a.has-text-primary:focus {
+  color: #44267c !important;
+}
+
 .mr-auto {
   margin-right: auto !important;
+}
+
+.is-size-1 {
+  font-size: 3rem !important;
 }
 /* Bulma Utilities */
 
@@ -176,7 +188,7 @@ a:hover {
 /* Bulma Form */
 
 h1 {
-  color: red;
+  color: blue;
 }
 
 /*# sourceMappingURL=global.css.map */

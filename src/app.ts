@@ -13,20 +13,24 @@ import AppRoutes from "./routes";
 
 const appRoutes = new AppRoutes();
 const app: Application = express();
+const publicPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../views");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(publicPath));
 
 app.use(cors());
-app.use(helmet());
+
+// Reconfigure once errors are figured out
+// app.use(helmet());
 app.use(morgan(":method _ :url _ :status _ :response-time"));
 
 app.use(appRoutes.getUserRoutes().name, appRoutes.getUserRoutes().router);
 app.use(appRoutes.getTweetRoutes().name, appRoutes.getTweetRoutes().router);
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
+app.set("views", path.join(viewsPath));
 app.set("view options", { layout: false } );
 
 app.get("/", (req: Request, res: Response) => {

@@ -1,16 +1,22 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Momus.io API, built in TypeScript and Express.js",
+  "description": "Momus.io, built with TypeScript and Node.js",
   "scripts": {
     "commit": "git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
-    "build": "rm -rf build && tsc",
+    "build": "rm -rf build && tsc && npm run build:public",
     "start": "node build/src/server.js",
-    "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files src/server.ts & npm run scss & npm run purge",
+    "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files build/src/server.js",
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit",
-    "scss": "sass --watch src/scss/main.scss public/styles/main.css",
-    "purge": "purgecss -css public/styles/global.css --content views/**/*.ejs --output public/styles/min.css"
+    "scss": "sass --watch src/scss/main.scss public/styles/global.css",
+    "purge": "purgecss -css public/styles/global.css --content views/**/*.ejs --output public/styles/global.css",
+    "build:public": "npm run scss & npm run purge & npm run copy:views & npm run copy:assets & npm run copy:styles & npm run bundle:js",
+    "copy:views": "mkdir build/views && cp -r views/* build/views",
+    "copy:styles": "mkdir build/public/styles && cp -r public/styles/* build/public/styles",
+    "copy:assets": "mkdir build/public/images && cp -r public/images/* build/public/images",
+    "dev:build": "npm run build && npm run dev",
+    "bundle:js": "esbuild ./build/public/scripts/index.js --bundle --outfile=./build/public/scripts/bundle.js --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --format=esm"
   },
   "engines": {
     "node": "16.x"
@@ -22,6 +28,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
+    "esbuild": "^0.14.5",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "morgan": "^1.10.0",
