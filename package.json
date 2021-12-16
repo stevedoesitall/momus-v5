@@ -11,7 +11,7 @@
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit",
     "scss": "sass src/scss/main.scss public/styles/global.css",
     "purge": "purgecss -css public/styles/global.css --content views/**/*.ejs --output public/styles/global.css",
-    "build:public": "npm run scss & npm run purge & npm run copy:views & npm run copy:assets & npm run copy:styles & npm run bundle:js",
+    "build:public": "npm run scss && npm run purge & npm run copy:views & npm run copy:assets & npm run copy:styles & npm run bundle:js",
     "copy:views": "mkdir build/views && cp -r views/* build/views",
     "copy:styles": "mkdir build/public/styles && cp -r public/styles/* build/public/styles",
     "copy:assets": "mkdir build/public/images && cp -r public/images/* build/public/images",
