@@ -1,5 +1,18 @@
-# Momus.io API v5
+# Momus.io v5
 
-## API for Momus.io. Built in Node.js, Express.js, and TypeScript
+## Fullstack web app for Momus.io. Written in TypeScript
 
-### More information coming soon
+### Frontend:
+
+- EJS templating
+- Bulma.io CSS framework
+
+### Backend:
+
+- Node.js
+- Express.js
+
+### Database:
+
+- PostgreSQL
+- Prisma.io ORM
