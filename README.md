@@ -1,6 +1,6 @@
 # Momus.io v5
 
-## Fullstack web app for Momus.io. Written in TypeScript
+## Fullstack web app for Momus.io. Written in TypeScript.
 
 ### Frontend:
 
@@ -16,3 +16,10 @@
 
 - PostgreSQL
 - Prisma.io ORM
+
+### Tooling:
+
+- ESLint for linting
+- Mocha for testing
+- ESBuild for bundling
+- PurgeCSS for CSS minification
