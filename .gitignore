@@ -3,4 +3,3 @@ node_modules/
 sandbox/
 *.test.*
 .env
-main.css

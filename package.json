@@ -1,23 +1,26 @@
 {
   "name": "server",
+  "main": "build/src/server.js",
   "version": "1.0.0",
   "description": "Momus.io, built with TypeScript and Node.js",
   "scripts": {
     "commit": "npm run build && git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
     "build": "rm -rf build && tsc && npm run build:public",
-    "start": "node build/src/server.js",
-    "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files build/src/server.js",
+    "start": "node .",
+    "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files .",
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit",
     "scss": "sass src/scss/global.scss public/styles/global.css",
-    "purge": "purgecss -css public/styles/global.css --content views/**/*.ejs --output public/styles/global.css",
-    "build:public": "npm run bundle:css && npm run copy:views && npm run copy:assets && npm run copy:styles && npm run bundle:js",
+    "purge": "purgecss --css public/styles/main.css, public/styles/global.css --content views/**/*.ejs --output public/styles/global.css",
     "copy:views": "mkdir build/views && cp -r views/* build/views",
-    "copy:styles": "mkdir build/public/styles && cp -r public/styles/* build/public/styles",
+    "copy:styles": "mkdir build/public/styles && cp -r public/styles/*.css build/public/styles",
     "copy:assets": "mkdir build/public/images && cp -r public/images/* build/public/images",
     "dev:build": "npm run build && npm run dev",
-    "bundle:css": "npm run scss && npm run purge",
-    "bundle:js": "esbuild ./build/public/scripts/index.js --bundle --outfile=./build/public/scripts/bundle.js --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --format=esm"
+    "bundle:css": "npm run scss && npm run purge && esbuild ./public/styles/global.css --bundle --outfile=./build/public/styles/bundle.css --minify --sourcemap",
+    "bundle:js": "esbuild ./build/public/scripts/index.js --bundle --outfile=./build/public/scripts/bundle.js --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --format=esm",
+    "remove:js": "mv build/public/scripts/bundle.js build/public/scripts/bundle.js.keep && rm build/public/scripts/*.js && mv build/public/scripts/bundle.js.keep build/public/scripts/bundle.js",
+    "remove:css": "mv build/public/styles/bundle.css build/public/styles/bundle.css.keep && rm build/public/styles/*.css && mv build/public/styles/bundle.css.keep build/public/styles/bundle.css",
+    "build:public": "npm run copy:views && npm run copy:assets && npm run copy:styles && npm run bundle:js && npm run bundle:css && npm run remove:js && npm run remove:css"
   },
   "engines": {
     "node": "16.x"
