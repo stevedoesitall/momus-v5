@@ -20,8 +20,7 @@
     "dev": "nodemon --watch './**/*.ts' --watch 'tsconfig.json' --exec 'ts-node' --files .",
     "dev:build": "npm run build && npm run dev",
     "lint": "eslint . --ext .ts --fix",
-    "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit",
-    "testj": "jasmine"
+    "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit"
   },
   "engines": {
     "node": "16.x"
