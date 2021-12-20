@@ -1,7 +1,7 @@
 import usersRouter from "../components/users/users.router";
 import tweetsRouter from "../components/tweets/tweets.router";
 
-class AppRoutes {
+class ApiRoutes {
 	public getUserRoutes() {
 		return usersRouter;
 	}
@@ -11,4 +11,4 @@ class AppRoutes {
 	}
 }
 
-export default AppRoutes;
+export default ApiRoutes;
