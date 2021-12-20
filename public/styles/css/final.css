@@ -50,9 +50,14 @@ a.has-text-primary:hover, a.has-text-primary:focus {
   user-select: none;
 }
 
+ .title:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
 /* Bulma Base */
 /*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
-
+html,
+body,
 p,
 ul,
 li,
@@ -78,13 +83,42 @@ button {
   margin: 0;
 }
 
+html {
+  box-sizing: border-box;
+}
+
 *, *::before, *::after {
   box-sizing: inherit;
 }
 
+html {
+  background-color: #eff0eb;
+  font-size: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+}
 
+
+footer,
+header {
+  display: block;
+}
+
+body,
 button {
   font-family: "Roboto", sans-serif;
+}
+
+body {
+  color: #0d0d0e;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 a {
@@ -112,12 +146,24 @@ a:hover {
   position: relative;
   z-index: 30;
 }
+.navbar > .container {
+  align-items: stretch;
+  display: flex;
+  min-height: 3.25rem;
+  width: 100%;
+}
 
 .navbar-brand {
   align-items: stretch;
   display: flex;
   flex-shrink: 0;
   min-height: 3.25rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar > .container {
+    display: block;
+  }
 }
 @media screen and (min-width: 1024px) {
   .navbar {
@@ -127,6 +173,11 @@ a:hover {
 
   .navbar {
     min-height: 3.25rem;
+  }
+
+  .navbar > .container .navbar-brand,
+.container > .navbar .navbar-brand {
+    margin-left: -0.75rem;
   }
 }
 
@@ -146,6 +197,22 @@ a:hover {
   text-align: center;
   white-space: nowrap;
 }
+.button .icon {
+  height: 1.5em;
+  width: 1.5em;
+}
+.button .icon:first-child:not(:last-child) {
+  margin-left: calc(-0.5em - 2px);
+  margin-right: 0.25em;
+}
+.button .icon:last-child:not(:first-child) {
+  margin-left: 0.25em;
+  margin-right: calc(-0.5em - 2px);
+}
+.button .icon:first-child:last-child {
+  margin-left: calc(-0.5em - 2px);
+  margin-right: calc(-0.5em - 2px);
+}
 .button:hover {
   border-color: #797575;
   color: #363636;
@@ -162,6 +229,26 @@ a:hover {
   color: #363636;
 }
 
+.container {
+  flex-grow: 1;
+  margin: 0 auto;
+  position: relative;
+  width: auto;
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+.icon {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
 @keyframes moveIndeterminate {
   from {
     background-position: 200% 0;
@@ -171,9 +258,25 @@ a:hover {
   }
 }
 
+.title {
+  word-break: break-word;
+}
+
+.title {
+  color: #363636;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.125;
+}
+
 /* Bulma Grid */
 
 /* Bulma Layout */
+
+.footer {
+  background-color: #fafafa;
+  padding: 3rem 1.5rem 6rem;
+}
 
 /* Bulma Form */
 

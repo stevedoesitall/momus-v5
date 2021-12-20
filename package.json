@@ -11,7 +11,7 @@
     "copy:styles": "mkdir build/public/styles && cp -r public/styles/css/*.css build/public/styles",
     "copy:assets": "mkdir build/public/images && cp -r public/images/* build/public/images",
     "scss": "sass public/styles/scss/global.scss public/styles/css/global.css",
-    "clean:css": "rm public/styles/css/final.css && mkdir public/styles/purged && purgecss --css public/styles/css/*.css --content views/**/*.ejs --output public/styles/purged && rm public/styles/css/global.* && npm run concat:css",
+    "clean:css": "rm public/styles/css/final.css && mkdir public/styles/purged && purgecss --css public/styles/css/*.css --content views/layout.ejs views/**/*.ejs --output public/styles/purged && rm public/styles/css/global.* && npm run concat:css",
     "concat:css": "cat public/styles/purged/*.css > ./public/styles/css/final.css && rm -rf public/styles/purged",
     "bundle:js": "esbuild ./build/public/scripts/index.js --bundle --outfile=./build/public/scripts/bundle.js --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --format=esm",
     "bundle:css": "npm run scss && npm run clean:css && esbuild ./public/styles/css/final.css --bundle --outfile=./build/public/styles/bundle.css --minify --sourcemap",
