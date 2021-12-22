@@ -1,5 +1,5 @@
-import usersRouter from "../components/users/users.router";
-import tweetsRouter from "../components/tweets/tweets.router";
+import usersRouter from "../../components/users/users.router";
+import tweetsRouter from "../../components/tweets/tweets.router";
 
 class ApiRoutes {
 	public getUserRoutes() {

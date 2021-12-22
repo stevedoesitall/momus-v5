@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 // import { CreateTweet } from "../../types/tweets.model";
 import TweetsServices from "./tweets.services";
+import getLinkedTweets from "../../utils/get-linked-tweets";
 
 class TweetsMiddleware {
 	async validateTweetExists(req: Request, res: Response, next: NextFunction) {
@@ -11,18 +12,39 @@ class TweetsMiddleware {
 			if (!tweet) {
 				return res.status(404).send({
 					"error": "User does not exist."
-				});
-			}
+				}); 
+			} 
 
 			res.typedLocals = res.locals;
 			res.typedLocals.dataObj = tweet;
+
+		} else if (req.query.date) {
+			const date = req.query.date;
+
+			if (typeof date === "string") {
+				const tweets = await TweetsServices.findByDate(date);
+				const linked = getLinkedTweets(tweets, date);
+				console.log(linked);
+				if (!tweets) {
+					return res.status(404).send({
+						"error": "No tweets found for this date."
+					});
+				}
+	
+				res.typedLocals = res.locals;
+				res.typedLocals.dataArr = tweets;
+			} else {
+				return res.status(404).send({
+					"error": "Invalid date."
+				});
+			}
 
 		} else {
 			const tweets = await TweetsServices.findAll();
 
 			if (!tweets.length) {
 				return res.status(404).send({
-					"error": "No users found."
+					"error": "No tweets found."
 				});
 			}
 
@@ -32,6 +54,7 @@ class TweetsMiddleware {
 
 		next();
 	}
+
 }
 
 export default new TweetsMiddleware();

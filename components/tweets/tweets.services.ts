@@ -14,6 +14,12 @@ class TweetsServices {
 		return tweet;
 	}
 
+	async findByDate(value: string): Promise<tweets[] | null> {
+		const tweets: tweets[] = await prisma.$queryRaw`SELECT * FROM tweets WHERE TO_CHAR(created_at AT TIME ZONE 'GMT-05:00 DST', 'YYYY-MM-DD') = ${value} ORDER BY created_at ASC`;
+
+		return tweets;
+	}
+
 	async findAll(): Promise<tweets[]> {
 		const allTweets: tweets[] = await prisma.tweets.findMany();
 
