@@ -8,7 +8,7 @@
     "build": "ts-node ./src/bin/build.ts",
     "start": "node .",
     "dev": "nodemon --ext 'ts,json' --exec 'ts-node --files src/bin/server.ts'",
-    "dev:build": "npm run build && npm run dev",
+    "dev:build": "npm run build && npm run start",
     "lint": "eslint . --ext .ts --fix",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit"
   },

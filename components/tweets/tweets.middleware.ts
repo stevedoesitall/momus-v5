@@ -1,7 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-// import { CreateTweet } from "../../types/tweets.model";
 import TweetsServices from "./tweets.services";
-import getLinkedTweets from "../../utils/get-linked-tweets";
 
 class TweetsMiddleware {
 	async validateTweetExists(req: Request, res: Response, next: NextFunction) {
@@ -23,8 +21,7 @@ class TweetsMiddleware {
 
 			if (typeof date === "string") {
 				const tweets = await TweetsServices.findByDate(date);
-				const linked = getLinkedTweets(tweets, date);
-				console.log(linked);
+
 				if (!tweets) {
 					return res.status(404).send({
 						"error": "No tweets found for this date."
@@ -32,7 +29,7 @@ class TweetsMiddleware {
 				}
 	
 				res.typedLocals = res.locals;
-				res.typedLocals.dataArr = tweets;
+				res.typedLocals.dataObj = tweets;
 			} else {
 				return res.status(404).send({
 					"error": "Invalid date."
@@ -54,7 +51,6 @@ class TweetsMiddleware {
 
 		next();
 	}
-
 }
 
 export default new TweetsMiddleware();

@@ -12,10 +12,10 @@
     "typeRoots": [
       "./node_modules/@types",
       "./types/express.d.ts"
-    ]
+    ],
   },
   "exclude": [
     "sandbox/",
-    "node_modules/",
+    "node_modules/"
   ]
 }

@@ -7,4 +7,15 @@ interface CreateTweet {
     next?: CreateTweet | null;
 }
 
-export { CreateTweet };
+interface LinkedValues {
+    prev: string | null;
+    next: string | null;
+}
+
+interface TweetReturn {
+    tweets: CreateTweet[];
+    prev: string | null;
+    next: string | null;
+}
+
+export { CreateTweet, LinkedValues, TweetReturn };
