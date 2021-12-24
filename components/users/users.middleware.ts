@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateUser, UpdateUser } from "../../types/users.model";
+import { CreateUser, UpdateUser } from "../../types/users";
 import UsersServices from "./users.services";
 
 class UsersMiddleware {

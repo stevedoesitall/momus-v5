@@ -1,6 +1,6 @@
 import { tweets } from ".prisma/client";
 import convertDate from "./convert-date";
-import { LinkedValues } from "../types/tweets.model";
+import { LinkedValues } from "../types/tweets";
 
 const getLinkedTweets = (allTweets: tweets[] | null, value: string): LinkedValues => {
 	const convertedDate: string = convertDate(value + "T12:00:00+05:00");

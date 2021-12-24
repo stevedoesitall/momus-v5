@@ -1,5 +1,5 @@
 import { users, tweets } from "@prisma/client";
-import { TweetReturn } from "./tweets.model";
+import { TweetReturn } from "./tweets";
 interface Locals {
     dataArr?: users[] | tweets[]
     dataObj?: users | tweets | TweetReturn | null

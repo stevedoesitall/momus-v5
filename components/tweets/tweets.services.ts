@@ -1,5 +1,5 @@
 import { PrismaClient, tweets } from "@prisma/client";
-import { CreateTweet, TweetReturn } from "../../types/tweets.model";
+import { CreateTweet, TweetReturn } from "../../types/tweets";
 import getLinkedTweets from "../../utils/get-linked-tweets";
 const prisma = new PrismaClient();
 

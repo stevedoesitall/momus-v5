@@ -29,7 +29,7 @@ app.use(cors());
 
 app.use(
 	helmet({
-		contentSecurityPolicy: false,
+		contentSecurityPolicy: false
 	})
 );
 
