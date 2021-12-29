@@ -27,7 +27,7 @@ class TweetsMiddleware {
 						"error": "No tweets found for this date."
 					});
 				}
-	
+
 				res.typedLocals = res.locals;
 				res.typedLocals.dataObj = tweets;
 			} else {

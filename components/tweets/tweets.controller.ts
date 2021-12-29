@@ -25,7 +25,7 @@ class TweetsController {
 
 	async getAllTweets(req: Request, res: Response) {
 		try {
-			const tweets = res.typedLocals.dataArr;
+			const tweets = res.typedLocals.dataArr ? res.typedLocals.dataArr : res.typedLocals.dataObj;
 			return res.status(200).send({
 				"data": tweets,
 				"ok": true
