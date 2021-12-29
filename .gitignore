@@ -4,3 +4,4 @@ sandbox/
 tests/
 *.test.*
 .env
+.DS_Store

@@ -1,11 +1,6 @@
-# Momus.io v5
+# Momus.io v5 API
 
-## Fullstack web app for Momus.io. Written in TypeScript.
-
-### Frontend:
-
-- EJS templating
-- Bulma.io CSS framework
+## API for Momus.io. Written in TypeScript.
 
 ### Backend:
 
@@ -21,5 +16,3 @@
 
 - ESLint for linting
 - Mocha for testing
-- ESBuild for bundling
-- PurgeCSS for CSS minification

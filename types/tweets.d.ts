@@ -1,21 +1,16 @@
-interface CreateTweet {
+interface Tweet {
     id: string;
     text: string;
     created_at: Date;
-    users_tweets: string[];
-    prev?: CreateTweet | null;
-    next?: CreateTweet | null;
+    users_tweets?: string[];
+    prev?: Tweet | null;
+    next?: Tweet | null;
 }
 
-interface LinkedValues {
+interface Tweets {
+    tweets?: Tweet[];
     prev: string | null;
     next: string | null;
 }
 
-interface TweetReturn {
-    tweets: CreateTweet[];
-    prev: string | null;
-    next: string | null;
-}
-
-export { CreateTweet, LinkedValues, TweetReturn };
+export { Tweet, Tweets };

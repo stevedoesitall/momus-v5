@@ -9,7 +9,7 @@ class TweetsMiddleware {
 			
 			if (!tweet) {
 				return res.status(404).send({
-					"error": "User does not exist."
+					"error": "Tweet does not exist."
 				}); 
 			} 
 
@@ -38,7 +38,7 @@ class TweetsMiddleware {
 
 		} else {
 			const tweets = await TweetsServices.findAll();
-
+			
 			if (!tweets.length) {
 				return res.status(404).send({
 					"error": "No tweets found."
@@ -48,6 +48,21 @@ class TweetsMiddleware {
 			res.typedLocals = res.locals;
 			res.typedLocals.dataArr = tweets;
 		}
+
+		next();
+	}
+
+	async validateTweetDates(req: Request, res: Response, next: NextFunction) {
+		const tweetDates = await TweetsServices.findAllDates();
+
+		if (!tweetDates) {
+			return res.status(404).send({
+				"error": "No tweet dates found."
+			});
+		}
+
+		res.typedLocals = res.locals;
+		res.typedLocals.dataArr = tweetDates;
 
 		next();
 	}

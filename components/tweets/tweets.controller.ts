@@ -6,7 +6,7 @@ class TweetsController {
 			const tweet = res.typedLocals.dataObj;
         
 			return res.status(200).send({
-				data: tweet,
+				"data": tweet,
 				"ok": true
 			});
 		}
@@ -25,10 +25,31 @@ class TweetsController {
 
 	async getAllTweets(req: Request, res: Response) {
 		try {
-			const tweets = res.typedLocals.dataObj;
-        
+			const tweets = res.typedLocals.dataArr;
 			return res.status(200).send({
-				data: tweets,
+				"data": tweets,
+				"ok": true
+			});
+		}
+        
+		catch (error) {
+			return res.status(500).send({
+				"error": "Bad request.",
+				"ok": false
+			});
+		}
+        
+		finally {
+			console.log("Finished.");
+		}
+	}
+
+	async getTweetDates(req: Request, res: Response) {
+		try {
+			const tweetDates = res.typedLocals.dataArr;
+			
+			return res.status(200).send({
+				"data": tweetDates,
 				"ok": true
 			});
 		}
