@@ -8,7 +8,7 @@ interface Tweet {
 }
 
 interface Tweets {
-    tweets?: Tweet[];
+    tweets: Tweet[];
     prev: string | null;
     next: string | null;
 }

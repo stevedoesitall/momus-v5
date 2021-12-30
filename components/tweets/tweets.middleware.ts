@@ -20,16 +20,16 @@ class TweetsMiddleware {
 			const date = req.query.date;
 
 			if (typeof date === "string") {
-				const tweets = await TweetsServices.findByDate(date);
+				const data = await TweetsServices.findByDate(date);
 
-				if (!tweets) {
+				if (data?.tweets?.length === 0) {
 					return res.status(404).send({
 						"error": "No tweets found for this date."
 					});
 				}
 
 				res.typedLocals = res.locals;
-				res.typedLocals.dataObj = tweets;
+				res.typedLocals.dataObj = data;
 			} else {
 				return res.status(404).send({
 					"error": "Invalid date."

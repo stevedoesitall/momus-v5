@@ -1,7 +1,7 @@
 import { users, tweets } from "@prisma/client";
-import { Tweet, Tweets } from "./tweets";
+import { Tweets } from "./tweets";
 interface Locals {
-    dataArr?: users[] | tweets[] | Tweet[]
+    dataArr?: users[] | tweets[]
     dataObj?: users | tweets | Tweets | null
 }
 
