@@ -28,9 +28,9 @@ app.use(expressEjsLayouts);
 app.use(cors());
 
 app.use(
-	helmet({
-		contentSecurityPolicy: false
-	})
+  helmet({
+    contentSecurityPolicy: false
+  })
 );
 
 app.use(morgan(":method _ :url _ :status _ :response-time"));
@@ -41,11 +41,10 @@ app.use("", pagesRoutes);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(viewsPath));
-app.set("view options", { 
-	delimiter: "#",
-	openDelimiter: "{",
-	closeDelimiter: "}" 
+app.set("view options", {
+  delimiter: "#",
+  openDelimiter: "[",
+  closeDelimiter: "]"
 });
-
 
 export default app;

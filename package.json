@@ -4,13 +4,19 @@
   "version": "1.0.0",
   "description": "Momus.io, built with TypeScript and Node.js",
   "scripts": {
-    "commit": "npm run build && git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
+    "commit": "git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
     "build": "ts-node ./src/bin/build.ts",
     "start": "node .",
-    "dev": "nodemon --ext 'ts,json' --exec 'ts-node --files src/bin/server.ts'",
+    "dev": "nodemon --ext 'ts,json,ejs' --exec 'ts-node --files src/bin/server.ts'",
     "build:start": "npm run build && npm run start",
     "lint": "eslint . --ext .ts --fix",
+    "format": "prettier --write .",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run format && npm run build"
+    }
   },
   "engines": {
     "node": "16.x"
@@ -45,11 +51,24 @@
     "@typescript-eslint/parser": "^5.5.0",
     "bulma": "^0.9.3",
     "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
     "mocha": "^9.1.3",
     "nodemon": "^2.0.15",
+    "prettier": "2.5.1",
     "prisma": "^3.6.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false,
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "arrowParens": "always"
   },
   "eslintConfig": {
     "env": {
@@ -58,7 +77,8 @@
     },
     "extends": [
       "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -75,10 +95,6 @@
     ],
     "rules": {
       "@typescript-eslint/no-var-requires": "off",
-      "indent": [
-        "error",
-        "tab"
-      ],
       "linebreak-style": [
         "error",
         "unix"

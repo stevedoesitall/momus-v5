@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2021",   
+    "target": "ES2021",
     "module": "commonjs",
     "outDir": "build",
     "strict": true,
@@ -9,13 +9,7 @@
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "lib": ["DOM", "ES2021"],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types/express.d.ts"
-    ],
+    "typeRoots": ["./node_modules/@types", "./types/express.d.ts"]
   },
-  "exclude": [
-    "sandbox/",
-    "node_modules/"
-  ]
+  "exclude": ["sandbox/", "node_modules/"]
 }

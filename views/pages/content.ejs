@@ -1,0 +1,19 @@
+<main>
+    <div class="content home-page">
+      <h1 class="is-size-1 has-text-primary">Tweets for [#= date #]</h1>
+        [# data.tweets.forEach(tweet => { #]
+          <p>[#= tweet.text #] ([#= tweet.created_at #])</p>
+          <button class="favorite-btn" id="tweet-[#= tweet.id #]">Save</button>
+        [# }); #]
+    </div>
+
+    <div class="links">
+      [# if (data.prev) { #]
+        <p><a href="/content?date=[#= data.prev #]">Previous ([#= data.prev #])</a></p>
+      [# } #]
+
+      [# if (data.next) { #]
+        <p><a href="/content?date=[#= data.next #]">Next ([#= data.next #])</a></p>
+      [# } #]
+    </div>
+</main>

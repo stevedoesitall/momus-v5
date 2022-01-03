@@ -1,24 +1,24 @@
 import { Router } from "express";
 
 class RouterConfig {
-	public router: Router;
-	public _name = "";
+  public router: Router;
+  public _name = "";
 
-	constructor(router = Router()) {
-		this.router = router;
-	}
-	
-	set name(value: string) {
-		this._name = "/" + value;
-	}
+  constructor(router = Router()) {
+    this.router = router;
+  }
 
-	get name(): string {
-		return this._name;
-	}
+  set name(value: string) {
+    this._name = "/" + value;
+  }
 
-	public printSummary(): void {
-		console.log(`${this._name} router running.`);
-	}
-} 
+  get name(): string {
+    return this._name;
+  }
+
+  public printSummary(): void {
+    console.log(`${this._name} router running.`);
+  }
+}
 
 export { RouterConfig };
