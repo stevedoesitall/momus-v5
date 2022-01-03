@@ -2,11 +2,9 @@
   <div class="content home-page">
     <h1 class="is-size-1 has-text-primary">Dadboner</h1>
     [# allDates.forEach(row => { #]
-      <p><a href="/content?date=[#= row.date #]">[#= row.date #]</a></p>
+    <p><a href="/content?date=[#= row.date #]">[#= row.date #]</a></p>
     [# }); #]
   </div>
 </main>
 
-  <div>
-    [#- include('../partials/tweet'); #]
-  </div>
+<div>[#- include('../partials/tweet.html'); #]</div>

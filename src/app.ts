@@ -3,6 +3,7 @@ import cors from "cors";
 import express, { Application } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import ejs from "ejs";
 import expressEjsLayouts from "express-ejs-layouts";
 
 import ApiRoutes from "./routes/api.routes";
@@ -39,7 +40,9 @@ app.use(apiRoutes.getUserRoutes().name, apiRoutes.getUserRoutes().router);
 app.use(apiRoutes.getTweetRoutes().name, apiRoutes.getTweetRoutes().router);
 app.use("", pagesRoutes);
 
-app.set("view engine", "ejs");
+app.engine("html", ejs.renderFile);
+
+app.set("view engine", "html");
 app.set("views", path.join(viewsPath));
 app.set("view options", {
   delimiter: "#",

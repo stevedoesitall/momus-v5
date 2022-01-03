@@ -22,7 +22,7 @@ fs.unlinkSync("./public/styles/index.css");
 fs.mkdirSync("./public/styles/purged");
 
 child_process.execSync(
-  "purgecss --css public/styles/css/*.css --content views/layout.ejs views/**/*.ejs --output public/styles/purged"
+  "purgecss --css public/styles/css/*.css --content views/layout.html views/**/*.html --output public/styles/purged"
 );
 
 // Concatenate the purged CSS files
