@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "Momus.io, built with TypeScript and Node.js",
   "scripts": {
-    "commit": "git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
+    "pre-commit": "npm run lint && npm run format && npm run build",
+    "commit": "npm run pre-commit && git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
     "build": "ts-node ./src/bin/build.ts",
     "start": "node .",
     "dev": "nodemon --ext 'ts,json,ejs' --exec 'ts-node --files src/bin/server.ts'",
@@ -12,11 +13,6 @@
     "lint": "eslint . --ext .ts --fix",
     "format": "prettier --write .",
     "test": "mocha --require ts-node/register --watch-extensions ts components/**/*.test.ts --exit"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run format && npm run build"
-    }
   },
   "engines": {
     "node": "16.x"
