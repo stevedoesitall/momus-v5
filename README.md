@@ -4,7 +4,7 @@
 
 ### Frontend:
 
-- EJS templating
+- Svelte.js
 - Bulma.io CSS framework
 
 ### Backend:
@@ -20,6 +20,7 @@
 ### Tooling:
 
 - ESLint for linting
+- Prettier for formatting
 - Mocha for testing
 - ESBuild for bundling
 - PurgeCSS for CSS minification
