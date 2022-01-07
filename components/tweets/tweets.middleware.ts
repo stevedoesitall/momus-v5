@@ -1,20 +1,54 @@
 import { Request, Response, NextFunction } from "express";
 import TweetsServices from "./tweets.services";
-
+import { Tweet } from "../../types/tweets";
 class TweetsMiddleware {
   async validateTweetExists(req: Request, res: Response, next: NextFunction) {
     if (req.params.id) {
       const tweetId: string = req.params.id;
       const tweet = await TweetsServices.findOne(tweetId, "id");
+      const createdAt = new Date(req.body.created_at);
+      let method;
 
-      if (!tweet) {
-        return res.status(404).send({
-          error: "Tweet does not exist."
+      if (req.route.methods.get) {
+        method = "get";
+      } else if (req.route.methods.post) {
+        method = "post";
+      } else if (req.route.methods.delete) {
+        method = "delete";
+      } else if (req.route.methods.patch) {
+        method = "patch";
+      } else {
+        res.send({
+          error: "Unauthorized method.",
+          ok: false
         });
       }
 
-      res.typedLocals = res.locals;
-      res.typedLocals.dataObj = tweet;
+      if (!tweet) {
+        if (method === "get" || method === "delete" || method === "patch") {
+          return res.status(404).send({
+            error: "Tweet does not exist."
+          });
+        } else {
+          const newTweet: Tweet = {
+            id: tweetId,
+            text: req.body.text,
+            created_at: createdAt
+          };
+          await TweetsServices.createOne(newTweet);
+          res.typedLocals = res.locals;
+          res.typedLocals.dataBool = true;
+        }
+      } else {
+        if (method === "post") {
+          return res.status(404).send({
+            error: "Tweet already exists for this ID."
+          });
+        } else {
+          res.typedLocals = res.locals;
+          res.typedLocals.dataObj = tweet;
+        }
+      }
     } else if (req.query.date) {
       const date = req.query.date;
 

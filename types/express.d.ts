@@ -4,6 +4,7 @@ import { Tweets } from "./tweets";
 interface Locals {
   dataArr?: users[] | tweets[];
   dataObj?: users | tweets | Tweets | null;
+  dataBool?: boolean;
 }
 
 declare global {

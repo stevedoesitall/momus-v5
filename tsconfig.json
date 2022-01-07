@@ -9,7 +9,11 @@
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "lib": ["DOM", "ES2021"],
-    "typeRoots": ["./node_modules/@types", "./types/express.d.ts"]
+    "typeRoots": ["./node_modules/@types", "./types/express.d.ts"],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"]
+    }
   },
-  "exclude": ["sandbox/", "node_modules/"]
+  "exclude": ["sandbox/", "node_modules/", "web/"]
 }

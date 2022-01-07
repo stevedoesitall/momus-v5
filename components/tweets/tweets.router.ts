@@ -3,9 +3,9 @@ import TweetsController from "./tweets.controller";
 import { RouterConfig } from "../../configs/config.routes";
 
 const tweetsRouter = new RouterConfig();
-tweetsRouter.name = "tweets";
+tweetsRouter.name = "api/tweets";
 tweetsRouter.router
-  // .post("/", [ UsersMiddleware.validateUserFields, UsersMiddleware.validateUserIsNew ], UsersController.createUser)
+  .post("/:id", [TweetsMiddleware.validateTweetExists], TweetsController.addOne)
   .get(
     "/dates",
     [TweetsMiddleware.validateTweetDates],

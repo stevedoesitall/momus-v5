@@ -43,6 +43,26 @@ class TweetsServices {
       await prisma.$queryRaw`SELECT DISTINCT TO_CHAR(created_at AT TIME ZONE 'GMT-05:00 DST', 'YYYY-MM-DD') as date from tweets ORDER BY date ASC`;
     return tweetDates;
   }
+
+  async createOne(tweet: Tweet): Promise<boolean> {
+    const wasAdded = await prisma.tweets.create({
+      data: {
+        created_at: tweet.created_at,
+        text: tweet.text,
+        id: tweet.id
+      }
+    });
+
+    return wasAdded ? true : false;
+  }
+
+  async createMany(tweets: Tweet[]): Promise<number> {
+    const wasAdded = await prisma.tweets.createMany({
+      data: tweets
+    });
+
+    return wasAdded.count;
+  }
 }
 
 export default new TweetsServices();

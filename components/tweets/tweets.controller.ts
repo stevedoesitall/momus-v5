@@ -55,6 +55,23 @@ class TweetsController {
       console.log("Finished.");
     }
   }
+
+  async addOne(req: Request, res: Response) {
+    try {
+      const wasAdded = res.typedLocals.dataBool;
+
+      return res.status(200).send({
+        ok: wasAdded
+      });
+    } catch (error) {
+      return res.status(500).send({
+        error: "Bad request.",
+        ok: false
+      });
+    } finally {
+      console.log("Finished.");
+    }
+  }
 }
 
 export default new TweetsController();
