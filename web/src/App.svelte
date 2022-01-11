@@ -21,6 +21,6 @@
   page.start();
 </script>
 
-<div id="content">
+<div>
   <svelte:component this={current} {params} />
 </div>

@@ -4,7 +4,7 @@
   export let tweetId;
 </script>
 
-<div>
+<div class="tweet">
   <p>{text} ({tweetId})</p>
   <p>Created At: {createdAt}</p>
 </div>

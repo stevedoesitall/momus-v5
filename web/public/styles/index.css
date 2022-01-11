@@ -13,12 +13,14 @@
 html,
 body,
 p,
-h1 {
+h1,
+h3 {
   margin: 0;
   padding: 0;
 }
 
-h1 {
+h1,
+h3 {
   font-size: 100%;
   font-weight: normal;
 }
@@ -98,7 +100,8 @@ a:hover {
 .content p:not(:last-child) {
   margin-bottom: 1em;
 }
-.content h1 {
+.content h1,
+.content h3 {
   color: #363636;
   font-weight: 600;
   line-height: 1.125;
@@ -109,6 +112,13 @@ a:hover {
 }
 .content h1:not(:first-child) {
   margin-top: 1em;
+}
+.content h3 {
+  font-size: 1.5em;
+  margin-bottom: 0.6666em;
+}
+.content h3:not(:first-child) {
+  margin-top: 1.3333em;
 }
 .content.is-small {
   font-size: 0.75rem;
@@ -223,5 +233,7 @@ h1 {
 
 /*# sourceMappingURL=global.css.map */
 
-
+h3 {
+  font-size: 30px;
+}
 

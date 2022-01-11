@@ -12,18 +12,24 @@
 
 <main>
   <h1>Dadboner Classic</h1>
-
-  {#each allDates as row}
-    <p><a href="/tweets/{row.date}">{row.date}</a></p>
-  {/each}
+  <h3>Really lookin' forward to the weekend, you guys.</h3>
+  {#if !allDates.length}
+    <p>Fetching Tweets...</p>
+    <progress class="progress is-small is-primary" max="100">15%</progress>
+  {:else}
+    {#each allDates as row}
+      <p><a href="/tweets/{row.date}">{row.date}</a></p>
+    {/each}
+  {/if}
 </main>
 
 <style>
   h1 {
-    font-size: 20px;
+    font-size: 5em;
   }
 
   p {
-    font-size: 12px;
+    font-size: 1.2em;
+    font-weight: bold;
   }
 </style>
