@@ -1,7 +1,7 @@
 import path from "node:path";
 import cors from "cors";
 
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
@@ -36,7 +36,7 @@ app.use(morgan(":method _ :url _ :status _ :response-time"));
 app.use(apiRoutes.getUserRoutes().name, apiRoutes.getUserRoutes().router);
 app.use(apiRoutes.getTweetRoutes().name, apiRoutes.getTweetRoutes().router);
 
-app.get("*", (req, res) => {
+app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.resolve(publicPath, "index.html"));
 });
 
