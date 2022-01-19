@@ -4,7 +4,9 @@
 /* Bulma Helpers */
 /* Bulma Utilities */
 
- .title:not(:last-child), .progress:not(:last-child), .content:not(:last-child) {
+.title:not(:last-child),
+.progress:not(:last-child),
+.content:not(:last-child) {
   margin-bottom: 1.5rem;
 }
 
@@ -29,7 +31,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -236,4 +240,3 @@ h1 {
 h3 {
   font-size: 30px;
 }
-

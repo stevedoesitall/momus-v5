@@ -1,46 +1,48 @@
-<script>
-  import { afterUpdate, onMount } from "svelte";
+<script lang="ts">
   import Tweet from "../components/Tweet.svelte";
-  export let params;
-  let tweets = [];
-  let prev;
-  let next;
+  import type { Tweets } from "../../../types/tweets";
 
-  const getTweets = async () => {
-    tweets = [];
-    const response = await fetch(`/api/tweets?date=${params.id}`);
-    const results = await response.json();
-    tweets = results.data.tweets;
-    prev = results.data.prev;
-    next = results.data.next;
+  export let tweetId: string;
+
+  let data: Tweets = {
+    tweets: [],
+    prev: null,
+    next: null
   };
 
-  onMount(async () => {
-    getTweets();
-  });
+  const getTweets = async (): Promise<void> => {
+    const response = await fetch(`/api/tweets?date=${tweetId}`);
+    const results = await response.json();
+    data.tweets = results.data.tweets;
+    data.prev = results.data.prev;
+    data.next = results.data.next;
+  };
 
   $: {
-    if (params.id) {
+    if (tweetId) {
+      data.tweets = [];
+      data.prev = null;
+      data.next = null;
       getTweets();
     }
   }
 </script>
 
 <div class="content">
-  {#if !tweets.length}
+  {#if !data.tweets.length}
     <p>Fetching Tweets...</p>
     <progress class="progress is-small is-primary" max="100">15%</progress>
   {:else}
-    {#each tweets as row}
+    {#each data.tweets as row}
       <Tweet text={row.text} createdAt={row.created_at} tweetId={row.id} />
     {/each}
 
-    {#if prev}
-      <p><a href="/tweets/{prev}">Previous ({prev})</a></p>
+    {#if data.prev}
+      <p><a href="/tweets/{data.prev}">Previous ({data.prev})</a></p>
     {/if}
 
-    {#if next}
-      <p><a href="/tweets/{next}">Next ({next})</a></p>
+    {#if data.next}
+      <p><a href="/tweets/{data.next}">Next ({data.next})</a></p>
     {/if}
   {/if}
 

@@ -1,5 +1,5 @@
-import app from "../app";
-import configObj from "../../configs/config.vars";
+import app from "./bin/app";
+import configObj from "../configs/config.vars";
 
 const { port } = configObj;
 

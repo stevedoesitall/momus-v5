@@ -1,8 +1,8 @@
 import { users, tweets } from "@prisma/client";
-import { Tweets } from "./tweets";
+import { Tweets, TweetDates } from "./tweets";
 
 interface Locals {
-  dataArr?: users[] | tweets[];
+  dataArr?: users[] | tweets[] | TweetDates[];
   dataObj?: users | tweets | Tweets | null;
   dataBool?: boolean;
 }

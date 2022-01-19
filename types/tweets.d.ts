@@ -20,4 +20,8 @@ interface Tweets {
   meta?: TweetMeta | null;
 }
 
-export { Tweet, Tweets };
+interface TweetDates {
+  date: string;
+}
+
+export { Tweet, Tweets, TweetDates };

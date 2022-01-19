@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": true,
+    "lib": ["DOM", "ES2021"]
+  },
+  "extends": "@tsconfig/svelte/tsconfig.json"
+}

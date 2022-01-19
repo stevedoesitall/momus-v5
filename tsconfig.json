@@ -15,5 +15,5 @@
       "*": ["*"]
     }
   },
-  "exclude": ["sandbox/", "node_modules/", "web/"]
+  "exclude": ["sandbox/", "node_modules/", "web/", "src/bin/build.ts"]
 }

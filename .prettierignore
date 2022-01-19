@@ -1,7 +1,5 @@
 build/
 node_modules/
-prisma/
 sandbox/
-tests/
 *.test.*
 .env

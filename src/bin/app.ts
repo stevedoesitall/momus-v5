@@ -5,7 +5,7 @@ import express, { Application } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import ApiRoutes from "./routes/api.routes";
+import ApiRoutes from "./api.routes";
 
 // Update this to send to PG
 // const today = new Date().toDateString();
@@ -17,7 +17,7 @@ const apiRoutes = new ApiRoutes();
 
 const app: Application = express();
 
-const publicPath = path.join(__dirname, "../public");
+const publicPath = path.join(__dirname, "../../public");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

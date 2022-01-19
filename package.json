@@ -1,11 +1,11 @@
 {
   "name": "momus.io",
-  "main": "build/src/bin/server.js",
+  "main": "build/src/server.js",
   "version": "1.0.0",
   "description": "Momus.io, built with TypeScript, Svelte.js, and Node.js",
   "scripts": {
-    "commit": "git init && git status && git add . && git commit -m $MSG && git push origin HEAD:main",
-    "build": "node ./src/bin/build.mjs",
+    "commit": "git init && git status && git add . && git commit -m $MSG && git push",
+    "build": "ts-node ./src/bin/build.ts",
     "start": "node .",
     "dev": "nodemon .",
     "build:dev": "npm run build && npm run dev",
@@ -16,6 +16,9 @@
   },
   "engines": {
     "node": "16.x"
+  },
+  "prisma": {
+    "schema": "src/models/schema.prisma"
   },
   "author": "Steve Giordano",
   "license": "ISC",
@@ -40,6 +43,7 @@
     "svelte-preprocess": "^4.10.1"
   },
   "devDependencies": {
+    "@tsconfig/svelte": "^3.0.0",
     "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
     "@types/eslint": "^8.2.0",

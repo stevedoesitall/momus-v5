@@ -60,6 +60,7 @@ fs.rmSync("./web/public/styles/purged", {
 build({
   entryPoints: ["./web/src/main.js"],
   bundle: true,
+  tsconfig: "./web/tsconfig.json",
   minify: true,
   outfile: "./build/public/assets/bundle.js",
   sourcemap: true,
@@ -72,7 +73,7 @@ build({
 }).catch(() => process.exit(1));
 
 // Copy images folder
-const copyFolderSync = (from, to) => {
+const copyFolderSync = (from: string, to: string) => {
   fs.mkdirSync(to);
   fs.readdirSync(from).forEach((file) => {
     if (fs.lstatSync(path.join(from, file)).isFile()) {

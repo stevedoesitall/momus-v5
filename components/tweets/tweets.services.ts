@@ -1,5 +1,5 @@
 import { PrismaClient, tweets } from "@prisma/client";
-import type { Tweet, Tweets } from "../../types/tweets";
+import type { Tweet, Tweets, TweetDates } from "../../types/tweets";
 import getLinkedTweets from "../../utils/get-linked-tweets";
 const prisma = new PrismaClient();
 
@@ -38,8 +38,8 @@ class TweetsServices {
     return allTweets;
   }
 
-  async findAllDates(): Promise<Tweet[]> {
-    const tweetDates: Omit<Tweet[], "id" | "text"> =
+  async findAllDates(): Promise<TweetDates[]> {
+    const tweetDates: TweetDates[] =
       await prisma.$queryRaw`SELECT DISTINCT TO_CHAR(created_at AT TIME ZONE 'GMT-05:00 DST', 'YYYY-MM-DD') as date from tweets ORDER BY date ASC`;
     return tweetDates;
   }

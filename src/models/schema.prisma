@@ -7,6 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model logs {
+  id            Int    @id @default(autoincrement())
+  method        String @db.VarChar(25)
+  url           String @db.VarChar(25)
+  status        Int
+  response_time Float
+}
+
 model tweets {
   id           String         @id @db.VarChar(225)
   text         String         @db.VarChar(500)

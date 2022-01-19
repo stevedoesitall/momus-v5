@@ -1,3 +1,6 @@
+<script lang="ts">
+</script>
+
 <div id="navbar">
   <a href="/">Home</a>
   <a href="/about">About</a>

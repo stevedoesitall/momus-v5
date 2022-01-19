@@ -1,12 +1,17 @@
-<script>
-  export let text;
-  export let createdAt;
-  export let tweetId;
+<script lang="ts">
+  export let text: string;
+  export let createdAt: Date;
+  export let tweetId: string;
+  const exportObj = {
+    text,
+    createdAt,
+    tweetId
+  };
 </script>
 
 <div class="tweet">
-  <p>{text} ({tweetId})</p>
-  <p>Created At: {createdAt}</p>
+  <p>{exportObj.text} ({exportObj.tweetId})</p>
+  <p>Created At: {exportObj.createdAt}</p>
 </div>
 
 <style>

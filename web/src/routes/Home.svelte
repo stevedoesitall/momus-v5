@@ -1,7 +1,9 @@
-<script>
-  let allDates = [];
+<script lang="ts">
+  import Header from "../components/Header.svelte";
+  import type { TweetDates } from "../../../types/tweets";
+  let allDates: TweetDates[] = [];
 
-  const getDates = async () => {
+  const getDates = async (): Promise<void> => {
     const response = await fetch("/api/tweets/dates");
     const results = await response.json();
     allDates = results.data;
@@ -11,6 +13,7 @@
 </script>
 
 <main>
+  <svelte:component this={Header} />
   <h1>Dadboner Classic</h1>
   <h3>Really lookin' forward to the weekend, you guys.</h3>
   {#if !allDates.length}
