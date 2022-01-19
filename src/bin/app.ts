@@ -5,7 +5,7 @@ import express, { Application } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import ApiRoutes from "./api.routes";
+import ApiRoutes from "./routes";
 
 // Update this to send to PG
 // const today = new Date().toDateString();

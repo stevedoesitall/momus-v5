@@ -1,6 +1,6 @@
 import { tweets } from ".prisma/client";
 import convertDate from "./convert-date";
-import { Tweets } from "../types/tweets";
+import { Tweets } from "../../types/tweets";
 
 const getLinkedTweets = (
   allTweets: tweets[] | null,

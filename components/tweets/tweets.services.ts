@@ -1,6 +1,6 @@
 import { PrismaClient, tweets } from "@prisma/client";
 import type { Tweet, Tweets, TweetDates } from "../../types/tweets";
-import getLinkedTweets from "../../utils/get-linked-tweets";
+import getLinkedTweets from "../../scripts/utils/get-linked-tweets";
 const prisma = new PrismaClient();
 
 class TweetsServices {
