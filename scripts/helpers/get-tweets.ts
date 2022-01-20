@@ -2,10 +2,10 @@ import axios from "axios";
 import nodemailer from "nodemailer";
 import cron from "node-cron";
 
-import convertDate from "../../utils/convert-date";
-import configObj from "../../../configs/config.vars";
-import TweetsServices from "../../../components/tweets/tweets.services";
-import { Tweet } from "../../..//types/tweets";
+import convertDate from "../utils/convert-date";
+import configObj from "../../configs/config.vars";
+import TweetsServices from "../../components/tweets/tweets.services";
+import { Tweet } from "../../types/tweets";
 
 const insertTweets = async (): Promise<unknown | boolean> => {
   const TWEET_OPTIONS = {
